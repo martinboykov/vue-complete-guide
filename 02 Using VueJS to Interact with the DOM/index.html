@@ -1,0 +1,39 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue app</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<style>
+    #app {
+        width: 100vw;
+        height: 100vh;
+    }
+</style>
+
+<body>
+    <div id="app" v-on:mousemove="updateCoord">
+        <p>{{title}} - <a v-bind:href="link">link</a></p>
+        <hr>
+        <p v-html="finishedLink"></p>
+        <!-- v-html exposes us to xss attacks -->
+
+        <p>Count: {{count}}</p>
+        <button v-on:click="increaseCount">+</button>
+        <button v-on:click="decreaseCount">-</button>
+        <button v-on:click="increaseCountBy(5, $event)">+5</button>
+        <p> Coordinates:{{x}} / {{y}}
+            - <span v-on:mousemove="dummy">DEAD SPOT 1</span>
+            - <span v-on:mousemove.stop="">DEAD SPOT 2</span>
+        </p>
+
+        <input type="text" v-on:keyup.enter="alertMe" v-model="title">
+        <p>Result: {{result()}} | {{output}}</p>
+    </div>
+    <script src="./script.js"></script>
+</body>
+
+</html>
